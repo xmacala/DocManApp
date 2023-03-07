@@ -8,9 +8,9 @@ export default function Register() {
             <div className="form">
                 <form>
                     <h1 className="title">Register</h1>
-                    <input type="text" placeholder="Name" />
-                    <input type="password" placeholder="Password" />
-                    <input type="password" placeholder="Confirm Password" />
+                    <input name="username" placeholder="Username"/>
+                    <input name="password" type="password" placeholder="Password" />
+                    <input name="confirmPassword" type="password" placeholder="Confirm Password" />
                     <button className="btn btn-block">Create account</button>
                     <p className="message">
                         Already Registered?  <Link to="/login"> Login!</Link>
