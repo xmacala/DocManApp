@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import AuthorizedLayout from "./layouts/LayoutAuthorized";
 import UnauthorizedLayout from "./layouts/LayoutUnauthorized";
+import Dashboard from "./pages/Dashboard";
 import Documents from "./pages/Document";
 
 import Login from "./pages/Login";
@@ -17,8 +18,8 @@ const router = createBrowserRouter([
                 element: <Navigate to="/documents"/>
             },
             {
-                path: '/documents',
-                element: <Documents />
+                path: '/home',
+                element: <Dashboard />
             },
         ]
     },

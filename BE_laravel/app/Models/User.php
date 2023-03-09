@@ -14,10 +14,16 @@ class User extends Authenticatable
 
     protected $fillable = [
         'name',
-        'password'
+        'password',
     ];
 
     protected $hidden = [
-        'password'
+        'password',
+        'remember_token',
     ];
+
+    public function documents() {
+        return $this->hasMany(Document::class);
+    }
+
 }
