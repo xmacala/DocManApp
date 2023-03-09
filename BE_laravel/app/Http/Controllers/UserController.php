@@ -4,66 +4,40 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserCollection;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        return new UserCollection(User::paginate(10));
+        return User::paginate(10);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(Request $request)
     {
-        //
+        return User::create($request->all());
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreUserRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show($id)
     {
-        return new UserResource(User::find($id));
+        return User::find($id);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $user)
+    public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+
+        return $user;
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateUserRequest $request, User $user)
+    public function delete($id)
     {
-        //
-    }
+        $user = User::findOrFail($id);
+        $user->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(User $user)
-    {
-        //
+        return 204;
     }
 }

@@ -20,17 +20,22 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/users', function () {
-    $uc = new UserController;
-    return $uc->index();
+Route::prefix('users')->group(function () {
+    Route::controller(UserController::class)->group(function () {
+        Route::post('', 'store');
+        Route::get('', 'index');
+        Route::get('{id}', 'show');
+        Route::put('{id}', 'update');
+        Route::delete('{id}', 'delete');
+    });
 });
 
-Route::get('/users/{id}',[UserController::class, 'show']);
-
-
-
-Route::post('/documents', [DocumentController::class, 'add']);
-
-Route::get('/documents', [DocumentController::class, 'index']);
-
-Route::get('/documents/{id}',[DocumentController::class, 'show']);
+Route::prefix('documents')->group(function () {
+    Route::controller(DocumentController::class)->group(function () {
+        Route::post('', 'store');
+        Route::get('', 'index');
+        Route::get('{id}', 'show');
+        Route::put('{id}', 'update');
+        Route::delete('{id}', 'delete');
+    });
+});
